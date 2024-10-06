@@ -9,7 +9,6 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,9 +19,11 @@ app.get('/', (req, res) => {
   res.send('Hello Surya!');
 });
 
+// Updated multer storage configuration to use /tmp
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, path.join(__dirname, 'uploads/'));
+      // Store files in /tmp on Vercel
+      cb(null, '/tmp');
     },
     filename: (req, file, cb) => {
       cb(null, Date.now() + path.extname(file.originalname));
@@ -50,7 +51,7 @@ app.post('/upload-pdf', upload.single('pdfFile'), async (req, res) => {
         // Delete the uploaded file after processing
         fs.unlinkSync(pdfFilePath);
     
-        const apiKey = 'AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs';
+        const apiKey = 'YOUR_GOOGLE_API_KEY';  // Replace with your Google API key
         if (!apiKey) {
             throw new Error('API key is missing.');
         }
@@ -89,9 +90,10 @@ app.post('/upload-pdf', upload.single('pdfFile'), async (req, res) => {
             error: error.message
         });
     }
-    
-    
 });
+
+
+
 
 app.post('/courses', async (req, res) => {
     console.log("hitted fc");
