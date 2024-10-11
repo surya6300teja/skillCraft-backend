@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-dotenv.config();
+
 
 // Routes
 // app.get('/', (req, res) => {
@@ -60,7 +60,7 @@ app.post('/upload-pdf', upload.single('pdfFile'), async (req, res) => {
     // Delete the uploaded file after processing
     fs.unlinkSync(pdfFilePath);
 
-    const apiKey = process.env.GEMINI_KEY;
+    const apiKey = "AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs";
     if (!apiKey) {
       throw new Error('API key is missing.');
     }
@@ -107,7 +107,7 @@ app.post('/courses', async (req, res) => {
     const receivedList = req.body.list;
     console.log('Received List:', receivedList);
 
-    const apiKey = process.env.GEMINI_KEY;
+    const apiKey = "AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs";
     if (!apiKey) {
       throw new Error('API key is missing.');
     }
