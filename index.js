@@ -32,7 +32,7 @@ app.get('/api', (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'temp/'));
+    cb(null, path.join(__dirname, 'uploads/'));
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Route for file upload
-app.post('/upload-pdf', async (req, res) => {
+app.post('/upload-pdf', upload.single('pdfFile'), async (req, res) => {
   console.log("hit");
   if (!req.file) {
     return res.status(400).json({
@@ -50,7 +50,8 @@ app.post('/upload-pdf', async (req, res) => {
     });
   }
   try {
-    const dataBuffer = req.file.buffer;
+    const pdfFilePath = req.file.path;
+    const dataBuffer = fs.readFileSync(pdfFilePath);
     
     // Parse the PDF
     const data = await pdfParse(dataBuffer);
