@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { process } = require('ipaddr.js');
+require('dotenv').config();
+
 
 const app = express();
 const port = process.env.PORT || 4000;
