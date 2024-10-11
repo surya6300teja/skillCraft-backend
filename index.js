@@ -8,7 +8,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { process } = require('ipaddr.js');
 
 const app = express();
-const port = process.env.PORT || 3000;
+
 
 // Middleware
 app.use(express.json());
