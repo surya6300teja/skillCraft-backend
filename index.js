@@ -6,33 +6,21 @@ const fs = require('fs');
 const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { process } = require('ipaddr.js');
-require('dotenv').config();
-
 
 const app = express();
-const port = process.env.PORT || 4000;
-
+const port = 3001;
 
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-process.env.config();
+
 
 // Routes
 // app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
 // });
-
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 
 app.get('/api', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
@@ -153,7 +141,6 @@ app.post('/courses', async (req, res) => {
 });
 
 // Start the server
-// module.exports = app;
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Server is running on port ${port}`);
+});
