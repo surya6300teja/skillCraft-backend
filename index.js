@@ -60,7 +60,7 @@ app.post('/upload-pdf', upload.single('pdfFile'), async (req, res) => {
     // Delete the uploaded file after processing
     fs.unlinkSync(pdfFilePath);
 
-    const apiKey = "AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs";
+    const apiKey = "AIzaSyC4jMbsXxsqTsOJonhmzY4Mn5_Wr1WnDDs";
     if (!apiKey) {
       throw new Error('API key is missing.');
     }
@@ -107,7 +107,7 @@ app.post('/courses', async (req, res) => {
     const receivedList = req.body.list;
     console.log('Received List:', receivedList);
 
-    const apiKey = "AIzaSyC5FdOLLPFtyDUq71DOidN8tX9WPqpXHIs";
+    const apiKey = "AIzaSyC4jMbsXxsqTsOJonhmzY4Mn5_Wr1WnDDs";
     if (!apiKey) {
       throw new Error('API key is missing.');
     }
